@@ -18,6 +18,11 @@ FROM products p
 WHERE p.price > (SELECT AVG(price) FROM products)
 ORDER BY p.price DESC;
 
+--OUTPUT
+--5	"iPhone 14 Pro Max"	14999.00	6546.30
+--1	"Samsung 65"""" TV"	12999.00	6546.30
+--3	"HP Laptop"	         8999.00	6546.30
+--6	"Apple iPad Air"	 8990.00	6546.30
 
 ---2) Find customers who have placed more than the avarage number of orders
 --   
@@ -42,6 +47,9 @@ CROSS JOIN avg_orders a
 WHERE opc.order_count > a.avg_cnt
 ORDER BY opc.order_count DESC, customer_name;
 
+-- OUTPUT
+--id   name     ordercount   glob avgcount
+--3	"Sara Berg"	   3	       2.14
 
 -- ------------------------------------------------
 -- WINDOW FUNCTIONS (2 st) – PostgreSQL
@@ -59,8 +67,10 @@ SELECT
     ) AS price_rank_within_brand
 FROM products p
 JOIN brands b ON b.id = p.brand_id
-ORDER BY b.name, price_rank_within_brand;
+ORDER BY p.price DESC;
 
+-- This query ranks products with each brand using ROW_NUMBER(). It partitions by brand_id
+-- and orders by price ascending. Thus, each brand's most expensive product has rank 1.
 
 -- 4) Show each customer's total spending and their rank among all customers
 --    summarizes order.total_amount and ranks with RANK() (tied ranks share the same number)
@@ -74,6 +84,8 @@ LEFT JOIN orders o ON o.customer_id = c.id
 GROUP BY c.id, c.first_name, c.last_name
 ORDER BY spending_rank, customer_name;
 
+-- This query calculates total spending per customer and assigns a rank RANK() OVER()
+-- Customers spending the most receive rank 1 and the least has 7
 
 -- ------------------------------------------------
 -- CASE / conditional logic
@@ -93,6 +105,8 @@ SELECT
 FROM products p
 ORDER BY price_category, p.price;
 
+-- This query uses a CASE expression to group products into categories. It simplifies
+-- pricing analysis and organizes products by price range.
 
 -- 6) Categorize customers by number of orders
 --    VIP (>3), Regular (2–3), New (1)
@@ -116,6 +130,4 @@ FROM customers c
 JOIN order_counts oc ON oc.customer_id = c.id  
 ORDER BY customer_segment, oc.order_count DESC, customer_name;
 
--- ============================================
--- SLUT PÅ FIL
--- ============================================
+

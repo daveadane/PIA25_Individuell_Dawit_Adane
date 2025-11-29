@@ -4,7 +4,7 @@
 -- Purpose: Show index optimizations and performance improvements
 -- =============================================
 
--- 1️⃣ Query 1: Products filtered by price
+-- Query 1: Products filtered by price
 -- ---------------------------------------------
 -- Problem: Filtering by price in queries like
 --    SELECT * FROM products WHERE price > 5000;
@@ -26,9 +26,9 @@ SELECT * FROM products WHERE price > 5000;
 -- Expected improvement:
 -- The sequential scan (Seq Scan) should be replaced
 -- by an Index Scan or Bitmap Index Scan, reducing execution time.
+-- Adding an index on the price column improves efficiency when filtering expensive products.
 
-
--- 2️⃣ Query 2: Orders filtered by customer_id
+-- Query 2: Orders filtered by customer_id
 -- ---------------------------------------------
 -- Problem: Queries like
 --    SELECT * FROM orders WHERE customer_id = 3;
@@ -50,6 +50,6 @@ SELECT * FROM orders WHERE customer_id = 3;
 -- Expected improvement:
 -- Execution plan will show Index Scan instead of Seq Scan.
 -- This improves performance for customer-based lookups.
-
+---Indexes reduce sequential scans, lower execution time, and improve scalability.
 
 

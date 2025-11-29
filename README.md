@@ -6,6 +6,10 @@ PIA25 Databaseteknik Individual Project
 Summery:
 It demonstrates how to store and retrieve data for brands, products, customers, orders, and reviews, with proper relationships between tables. 
 
+Clone the Respository
+git clone https://github.com/daveadane/PIA25_Individuell_Dawit_Adane.git
+cd PIA25_Individuell_Dawit_Adane
+
 Installation: 
  Create and Activate Virtual Environnment
     python -m venv venv
@@ -38,7 +42,7 @@ OPTIMIZATION
 ER Model
 Relationships
     One brand → many products
-    One customer → many orders
+    One customer → many orders 
     One order → many order_items
     one product → many reviews
     
