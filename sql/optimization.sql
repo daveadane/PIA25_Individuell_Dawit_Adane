@@ -36,10 +36,12 @@ SELECT * FROM products WHERE price > 5000;
 -- Solution: Create an index on customer_id.
 
 -- Before optimization
+-- This slows down the large data because the database checks every row
 EXPLAIN ANALYZE
 SELECT * FROM orders WHERE customer_id = 3;
 
 -- Create index on orders(customer_id)
+--It helps PostgreSQL finds rows faster without scanning the entire table. 
 CREATE INDEX IF NOT EXISTS idx_orders_customer_id ON orders(customer_id);
 
 -- After optimization
@@ -51,5 +53,5 @@ SELECT * FROM orders WHERE customer_id = 3;
 -- Execution plan will show Index Scan instead of Seq Scan.
 -- This improves performance for customer-based lookups.
 ---Indexes reduce sequential scans, lower execution time, and improve scalability.
-
+-- planning time is 0.030ms and Execution time is 0.013ms which is more faster
 

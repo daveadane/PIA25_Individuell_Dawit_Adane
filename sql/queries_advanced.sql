@@ -47,9 +47,12 @@ CROSS JOIN avg_orders a
 WHERE opc.order_count > a.avg_cnt
 ORDER BY opc.order_count DESC, customer_name;
 
+-- Two CTEs are used: one used to calculates each customers orders count and 
+-- the other computes the overall avarage. Customer with above-avarge orders are listed (Sara Berg)
 -- OUTPUT
 --id   name     ordercount   glob avgcount
 --3	"Sara Berg"	   3	       2.14
+
 
 -- ------------------------------------------------
 -- WINDOW FUNCTIONS (2 st) – PostgreSQL
@@ -70,7 +73,10 @@ JOIN brands b ON b.id = p.brand_id
 ORDER BY p.price DESC;
 
 -- This query ranks products with each brand using ROW_NUMBER(). It partitions by brand_id
--- and orders by price ascending. Thus, each brand's most expensive product has rank 1.
+-- and orders by price ascending. Thus, each brand's most expensive product has rank 1, the next one rank 2 and so on.
+-- In my example a brand has only one product, the product ranked first (Ninja and Electrolux), while more products ranked either
+-- 1 or 2. 
+
 
 -- 4) Show each customer's total spending and their rank among all customers
 --    summarizes order.total_amount and ranks with RANK() (tied ranks share the same number)
@@ -85,7 +91,8 @@ GROUP BY c.id, c.first_name, c.last_name
 ORDER BY spending_rank, customer_name;
 
 -- This query calculates total spending per customer and assigns a rank RANK() OVER()
--- Customers spending the most receive rank 1 and the least has 7
+-- Customers spending the most receive rank 1 and the least has 7, 
+-- In the abouve query, sara Berg with the spend of 27988 ranked 1 while Elin Sundberg ranked the leasr (7th)
 
 -- ------------------------------------------------
 -- CASE / conditional logic
@@ -107,7 +114,7 @@ ORDER BY price_category, p.price;
 
 -- This query uses a CASE expression to group products into categories. It simplifies
 -- pricing analysis and organizes products by price range.
-
+-- Based on the category, we only have only two categories-- 5 products with Medium and 5 products with premium
 -- 6) Categorize customers by number of orders
 --    VIP (>3), Regular (2–3), New (1)
 --    (customers without orders are excluded, but can be included as "No Orders if needed")
@@ -130,4 +137,6 @@ FROM customers c
 JOIN order_counts oc ON oc.customer_id = c.id  
 ORDER BY customer_segment, oc.order_count DESC, customer_name;
 
-
+-- This query classifies customers into segemnts based on how many orders they have placed.
+-- It uses a CTE to count orders per customer and CASE expression to assign each to a category.
+-- In the above query, all our customers are regular customers based on the catagory. 
