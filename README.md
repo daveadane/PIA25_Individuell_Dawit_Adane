@@ -1,34 +1,33 @@
-# 💻 Electronics Shop ORM Project
+Electronics Shop Database System
 
-**Dawit Adane**  
-*PIA25 Databasteknik Individual Project*
+Author: Dawit Adane
+Course: PIA25 – Databaseteknik Individual Project
 
----
+Summary
 
-## 🧾 Summary
-This project demonstrates how to **store and retrieve data** for brands, products, customers, orders, and reviews — while maintaining proper relationships between tables using **SQLAlchemy ORM**.
+This project demonstrates how to store and retrieve data for brands, products, customers, orders, and reviews, while maintaining proper relationships between tables using SQLAlchemy ORM.
 
----
+Clone the Repository
 
-## 🗂️ Clone the Repository
-```bash
+Run the following commands in your terminal:
 git clone https://github.com/daveadane/PIA25_Individuell_Dawit_Adane.git
 cd PIA25_Individuell_Dawit_Adane
 
-⚙️ Installation 
-1️⃣ Create and Activate Virtual Environment
-# Windows
+Installation
+1. Create and Activate a Virtual Environment
+
+Windows:
 python -m venv venv
 venv\Scripts\activate
 
-# Mac/Linux
+Mac/Linux:
 source venv/bin/activate
 
-2️⃣ Install Dependencies
+2. Install Dependencies
+
 pip install -r requirements.txt
 
-
-Required packages:
+Required Packages:
 
 SQLAlchemy
 
@@ -42,26 +41,35 @@ greenlet
 
 typing-extensions
 
-🧱 Database Setup
+Database Setup
+
+Create the database:
 CREATE DATABASE electronics_db;
 
-🧩 Features
+Run the setup scripts:
+\schema.sql
+\testdata.sql
+
+Features
+Database
+
+Uses SQLAlchemy ORM for connection and transactions
 
 Includes error handling and session management
 
-Supports .env environment variables for secure configuration
+Supports .env configuration for secure credentials
 
-🔍 Queries
+Queries
 
-Uses parameterized ORM queries for security
+Uses parameterized ORM queries for safety
 
 Demonstrates one-to-many and many-to-many relationships
 
-Includes filtering, grouping, joining, and aggregation queries
+Includes filtering, grouping, joining, and aggregation
 
-📊 Advanced Queries
+Advanced Queries
 
-The file queries_advanced.sql includes more complex SQL examples such as:
+The file queries_advanced.sql includes:
 
 Multi-table joins
 
@@ -75,7 +83,7 @@ Performance comparison between ORM and raw SQL queries
 
 Optimization
 
-The Optimization.sql file demonstrates:
+The file Optimization.sql demonstrates:
 
 Creation of indexes to improve query performance
 
@@ -87,14 +95,13 @@ Brand	One brand → Many products
 Customer	One customer → Many orders
 Order	One order → Many order items
 Product	One product → Many reviews
-
-
 Run the Application
+
 python src/main.py
 
 Application Output
 
-When executed, the application connects to the PostgreSQL database and displays the following:
+When executed, the application connects to the PostgreSQL database and displays:
 
 All products
 
@@ -117,3 +124,9 @@ Top spending customers
 Products with average ratings
 
 Pending orders with customer details
+
+Conclusion
+
+This project showcases a complete relational database system for an electronics store using PostgreSQL and SQLAlchemy ORM.
+
+It demonstrates best practices in database design, advanced querying, query optimization, and Python-based data management.
